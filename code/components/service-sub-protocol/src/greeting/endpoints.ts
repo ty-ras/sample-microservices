@@ -8,28 +8,27 @@ import type * as data from "./data";
 import type * as protocol from "@ty-ras/protocol"; // Imported only for JSDoc.
 
 /**
- * This is TyRAS protocol type definition for endpoint which performs a greeting.
+ * This is TyRAS protocol type definition for endpoint transforms a greeting.
  */
-export interface GetGreeting {
+export interface ProcessGreeting {
   /**
-   * The HTTP method for this endpoint: `GET`.
+   * The HTTP method for this endpoint: `POST`.
    * @see protocol.ProtocolSpecCore.method
    */
-  method: "GET";
+  method: "POST";
 
   /**
-   * The URL parameters for this endpoint.
+   * The request body type for this endpoint
    * Only one:
    * - `target`: The target of the greeting.
-   * @see protocol.ProtocolSpecURL.url
-   * @see data.GreetingTarget
+   * @see protocol.ProtocolSpecRequestBody.requestBody
+   * @see data.GreetingInput
    */
-  url: {
-    target: data.GreetingTarget;
-  };
+  requestBody: data.GreetingProcessingInput;
+
   /**
    * The response body for this endpoint.
    * @see protocol.ProtocolSpecCore.responseBody
    */
-  responseBody: data.GreetingResult;
+  responseBody: data.GreetingProcessingOutput;
 }

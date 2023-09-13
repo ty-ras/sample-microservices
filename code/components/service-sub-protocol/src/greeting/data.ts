@@ -5,15 +5,25 @@
 import * as data from "@ty-ras/data-zod"; // We don't import from main package in order for this code to be copypasteable into project shared by both BE and FE.
 import * as t from "zod";
 
-export const greetingTarget = t.string();
-export const greeting = t.string();
+export const greetingProcessingInput = t.object({
+  greeting: t.string(),
+});
+export const greetingProcessingOutput = t.object({
+  newGreeting: t.string(),
+  prefix: t.string(),
+  suffix: t.string(),
+});
 
 /**
- * The target of the protocol which does the greeting.
+ * The input for the greeting processing endpoint.
  */
-export type GreetingTarget = data.ProtocolTypeOf<typeof greetingTarget>;
+export type GreetingProcessingInput = data.ProtocolTypeOf<
+  typeof greetingProcessingInput
+>;
 
 /**
- * The greeting text.
+ * The output for the greeting processing endpoint
  */
-export type GreetingResult = data.ProtocolTypeOf<typeof greeting>;
+export type GreetingProcessingOutput = data.ProtocolTypeOf<
+  typeof greetingProcessingOutput
+>;
