@@ -1,22 +1,14 @@
-# HTTP Backend and Frontend with TyRAS Framework
+# TyRAS Sample - Microservices: Code for Services and Their Protocols
 
-Welcome to TyRAS-oriented Node HTTP fullstack app!
-This app is using [`zod`](https://github.com/colinhacks/zod) as data validation framework.
-The contents of this folder were created using [`ty-ras/start` npx starter template](https://github.com/ty-ras/start/tree/main/code).
+This folder contains all the code for the microservices part of this sample.
+There are only two of them, for brevity and simplicity sake:
+- [main service](./components/service-main) acting as an entrypoint (from e.g. frontend or other microservice), and
+- [sub service](./components/service-sub) acting as an internal microservice.
 
-# Project structure
+In addition to the code of the services themselves, their HTTP protocol behaviour is exposed as separate projects:
+- [main service protocol](./components/service-main-protocol) contains data validation structures and types related to endpoints exposed by the main service, and
+- [sub service protocol](./components/service-sub-protocol) does the same for the sub service.
 
-This project utilizes [workspaces](https://docs.npmjs.com/cli/v9/using-npm/workspaces) to organize the following components:
-- [backend component](./components/backend) to hold the code for the HTTP backend,
-- [frontend component](./components/frontend) to hold the code for the browser frontend, and
-- [protocol component](./components/protocol) to hold the code defining the HTTP endpoints and data contents used by both backend and frontend.
+All the 4 projects are managed as NPM workspaces, and the master `package.json` file [resides in this directory](./package.json).
 
-# Next tasks
-
-As a very first task, install dependencies of all the components, if not already done during project creation stage:
-```sh
-yarn install
-```
-
-Then, feel free to explore the three components mentioned above to learn more about them.
-Each of them will have a separate `README.md` file explaining their purpose and structure.
+This is not meant to be a full-scope example project, so things like `nodemon` and such are omitted.

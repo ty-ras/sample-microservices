@@ -1,33 +1,12 @@
-# HTTP Backend with TyRAS Framework
+# TyRAS Sample - Microservices: The Sub Service
 
-This component is a Node HTTP server app.
-It is part of the [TyRAS-oriented Node HTTP fullstack app](../../README.md).
+This folder contains the "sub service" project part of [the whole microservice sample codebase](../..).
+The idea of the sub service is that it is an internal microservice invokable by other microservices in the same environment.
+In this sample, the invocation is handled by [main service](../service-main).
 
-# Next tasks
+The endpoints for this microservice are defined utilizing `@ty-ras/backend-node-zod-openapi` library [in dedicated folder](./src/api/endpoints).
+The endpoints utilize the separate [sub service protocol project](../service-sub-protocol) so that it can be shared to with the main service which invokes this service.
 
-As a very first task, it is good idea to pick your favourite testing framework, and write some tests for the code.
-
-As a good second task, one can run development server.
-To do that, simply execute `dev` script from `package.json`:
-```sh
-yarn run dev
-```
-
-After running the command above, the text `Started server at <host>:<port>` will signal that HTTP server is now listening at given port.
-
-Please notice that installing dependencies **must not** be done from *this folder*, instead, it must be done from [main folder](../..).
-
-# The code structure
-
-The `src` folder contains all the code.
-That folder is further structured in the following way:
-- `api` folder contains all code related to HTTP server.
-    - `endpoints` subfolder contains the code which constructs the endpoints defined by [protocol component](../protocol), using functions and constants provided by TyRAS framework.
-    - `index.ts` ties all of the above together to expose `apiEndpoints` constant which contains all endpoints for TyRAS HTTP server to run.
-- `auth` folder contains `index.ts`, which can be modified to implement authentication code.
-- `config.ts` file contains deserialized and validated configuration for the program.
-  The deserialization uses `MY_BACKEND_CONFIG` environment variable, which is good idea to change to something else.
-  It currently only has HTTP server host and port, and CORS settings, but it can easily be expanded to encompass things like DB connection configs, resource pool eviction settings, and so on.
-  The development configuration matching this validator is in `config-dev.json` file.
-- `index.ts` file is an entrypoint to the program.
-  The program will start the TyRAS HTTP server using configuration in `config.ts` file.
+The endpoints are bound together to a single REST API in the [api folder](./src/api) so that it can be simply referenced to in [entrypoint file](./src/index.ts).
+The configuration for this service is exposed in [dedicated file](./src/config.ts).
+When running `yarn run dev`, the source for the configuration is in [development configuration JSON file](./config-dev.json).
