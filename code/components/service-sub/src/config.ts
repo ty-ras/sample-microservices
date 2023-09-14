@@ -28,16 +28,14 @@ const config = t
             // TODO: certs
           })
           .describe("HTTPServerConfig"),
-        // Remove this if CORS is not needed
-        cors: t
-          .object({
-            frontendAddress: t.string().nonempty(),
-          })
-          .describe("HTTPCorsConfig"),
       })
       .describe("HTTPConfig"),
-    // Insert any additional config properties here
-    // E.g. database, messaging, etc
+    greetingProcessing: t
+      .object({
+        prefix: t.string().nonempty(),
+        suffix: t.string().nonempty(),
+      })
+      .describe("GreetingProcessingConfig"),
   })
   .describe("BEConfig");
 

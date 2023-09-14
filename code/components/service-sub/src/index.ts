@@ -7,16 +7,9 @@ import auth from "./auth";
 
 const {
   http: {
-    cors,
     server: { host, port },
   },
 } = config;
-
-const corsHandler = tyras.createCORSHandler({
-  allowOrigin: cors.frontendAddress,
-  allowHeaders: ["Content-Type", "Authorization"],
-  allowMethods: true,
-});
 
 await tyras.listenAsync(
   tyras.createServer({
@@ -35,11 +28,7 @@ await tyras.listenAsync(
     },
     // React on various server events.
     events: (eventName, eventArgs) => {
-      // First, trigger CORS handler (it will modify the context object of eventArgs)
-      const corsTriggered = corsHandler(eventName, eventArgs);
-
-      // Then log event info + whether CORS triggered to console
-      console.info("EVENT", eventName, corsTriggered);
+      console.info("EVENT", eventName);
       logEventArgs(eventArgs);
     },
   }),

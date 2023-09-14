@@ -17,6 +17,12 @@ const authConfig = t
   })
   .describe("AuthConfig");
 
+// For now, this is all we need to call remote service
+const serviceConfig = t.object({
+  ...remoteEndpoint.shape,
+  scheme: t.union([t.literal("http"), t.literal("https")]),
+});
+
 const config = t
   .object({
     authentication: authConfig,
@@ -36,8 +42,11 @@ const config = t
           .describe("HTTPCorsConfig"),
       })
       .describe("HTTPConfig"),
-    // Insert any additional config properties here
-    // E.g. database, messaging, etc
+    services: t
+      .object({
+        sub: serviceConfig,
+      })
+      .describe("ServicesConfig"),
   })
   .describe("BEConfig");
 

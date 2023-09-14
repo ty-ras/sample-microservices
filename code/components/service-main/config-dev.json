@@ -8,5 +8,12 @@
     "cors": {
       "frontendAddress": "http://localhost:3001"
     }
+  },
+  "services": {
+    "sub": {
+      "host": "127.0.0.1",
+      "port": 3001,
+      "scheme": "http"
+    }
   }
 }

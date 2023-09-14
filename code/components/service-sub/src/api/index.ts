@@ -4,7 +4,8 @@
 
 import * as tyras from "@ty-ras/backend-node-zod-openapi";
 import app from "./app";
-import Greeting from "./endpoints/greeting";
+import config from "../config";
+import GreetingProcessing from "./endpoints/greeting-processing";
 
 /**
  * These endpoints compose the whole of REST API: the actual endpoints + endpoint to serve OpenAPI document about the actual endpoints.
@@ -21,8 +22,11 @@ export default tyras.endpointsWithOpenAPI(
     },
     {
       "/api/": {
-        // The final URL of greeting endpoint will be "/api/greet/{target}".
-        "greet/": new Greeting(),
+        // The final URL of greeting endpoint will be "/api/greet/process".
+        "greet/": new GreetingProcessing(
+          config.greetingProcessing.prefix,
+          config.greetingProcessing.suffix,
+        ),
       },
     },
   ),

@@ -3,7 +3,8 @@
  */
 
 import * as tyras from "@ty-ras/backend-node-zod-openapi";
-import { greeting } from "@ty-ras-sample/protocol";
+import { greeting } from "@ty-ras-sample/service-main-protocol";
+import serviceSub from "../service-sub";
 import app, { type StateSpecBase } from "../app";
 
 const urlPath = app.url`${tyras.urlParameter(
@@ -56,13 +57,22 @@ export default class GreetingEndpoint {
     responseBody: tyras.responseBody(greeting.data.greeting),
     state: stateSpec,
   })
-  getGreeting({
+  async getGreeting({
     url: { target },
   }: tyras.GetMethodArgs<
     greeting.GetGreeting,
     typeof urlPath,
     typeof stateSpec
   >) {
-    return `Hello, ${target}!`;
+    const processedGreeting = await serviceSub.greeting.processGreeting({
+      body: { greeting: `Hello, ${target}!` },
+    });
+    if (processedGreeting.error === "error-input") {
+      throw new tyras.HTTPError(500);
+    } else if (processedGreeting.error === "error") {
+      throw new tyras.HTTPError(502);
+    }
+    const { prefix, suffix, newGreeting } = processedGreeting.data;
+    return `${prefix}${newGreeting}${suffix}`;
   }
 }
