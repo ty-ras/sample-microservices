@@ -1,0 +1,21 @@
+{
+  "name": "@ty-ras-sample/service-main-protocol",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "module": "./src/index.ts",
+  "engines": {
+    "node": ">= 18"
+  },
+  "scripts": {
+    "build": "yarn run tsc",
+    "lint": "eslint ./src --ext .ts,.tsx",
+    "tsc": "tsc"
+  },
+  "dependencies": {
+    "@ty-ras/data-zod": "2.0.0"
+  },
+  "devDependencies": {}
+}

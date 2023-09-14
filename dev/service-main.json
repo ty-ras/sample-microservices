@@ -1,0 +1,19 @@
+{
+  "authentication": {},
+  "http": {
+    "server": {
+      "host": "0.0.0.0",
+      "port": 3000
+    },
+    "cors": {
+      "frontendAddress": "http://localhost:2999"
+    }
+  },
+  "services": {
+    "sub": {
+      "host": "tyras-sample-microservices-service-sub",
+      "port": 3000,
+      "scheme": "http"
+    }
+  }
+}
