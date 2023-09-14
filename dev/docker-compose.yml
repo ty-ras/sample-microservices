@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  service_main:
+    image: node:18-alpine
+    environment:
+      TYRAS_SAMPLE_MAIN_SERVICE_CONFIG: /run/secrets/config
+    ports:
+      - "127.0.0.1:3000:3000"
+    entrypoint:
+      - yarn
+      - run
+      - server-ts
+    volumes:
+      - "${TYRAS_SAMPLE_GIT_ROOT}/code/:${TYRAS_SAMPLE_GIT_ROOT}/code/:ro"
+    working_dir: "${TYRAS_SAMPLE_GIT_ROOT}/code/components/service-main"
+    secrets:
+      - source: main_service_config
+        target: config
+    networks:
+      # Put main service in Docker network, but don't assign any specific domain name to it, as there shouldn't be any incoming connections to this service from within this network
+      tyras_sample_microservices_nw:
+
+
+  service_sub:
+    image: node:18-alpine
+    environment:
+      TYRAS_SAMPLE_SUB_SERVICE_CONFIG: /run/secrets/config
+    # Notice: ports entry is not necessary for sub service
+    entrypoint:
+      - yarn
+      - run
+      - server-ts
+    volumes:
+      - "${TYRAS_SAMPLE_GIT_ROOT}/code/:${TYRAS_SAMPLE_GIT_ROOT}/code/:ro"
+    working_dir: "${TYRAS_SAMPLE_GIT_ROOT}/code/components/service-sub"
+    secrets:
+      - source: sub_service_config
+        target: config
+    networks:
+      tyras_sample_microservices_nw:
+        aliases:
+          - tyras-sample-microservices-service-sub
+    expose:
+      - 3000
+
+secrets:
+  main_service_config:
+    file: "${TYRAS_SAMPLE_GIT_ROOT}/dev/service-main.json"
+  sub_service_config:
+    file: "${TYRAS_SAMPLE_GIT_ROOT}/dev/service-sub.json"
+
+networks:
+  tyras_sample_microservices_nw:

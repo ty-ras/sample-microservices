@@ -39,8 +39,7 @@ const config = t
   })
   .describe("BEConfig");
 
-// Change this name to something more suitable for your application, and then update the 'dev' script in package.json file.
-const ENV_VAR_NAME = "MY_BACKEND_CONFIG";
+const ENV_VAR_NAME = "TYRAS_SAMPLE_SUB_SERVICE_CONFIG";
 export default configuration.validateFromMaybeStringifiedJSONOrThrow(
   config,
   await configuration.getJSONStringValueFromMaybeStringWhichIsJSONOrFilenameFromEnvVar(

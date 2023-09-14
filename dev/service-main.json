@@ -2,7 +2,7 @@
   "authentication": {},
   "http": {
     "server": {
-      "host": "127.0.0.1",
+      "host": "0.0.0.0",
       "port": 3000
     },
     "cors": {
@@ -11,8 +11,8 @@
   },
   "services": {
     "sub": {
-      "host": "127.0.0.1",
-      "port": 3001,
+      "host": "tyras-sample-microservices-service-sub",
+      "port": 3000,
       "scheme": "http"
     }
   }
