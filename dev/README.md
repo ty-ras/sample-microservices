@@ -7,3 +7,5 @@ The [sub service configuration file](./service-sub.json) contains HTTP server co
 
 The [environment execution file](./run-dev-environment.sh) encapsulates all actions needed to start the local environment from scratch (assuming POSIX shell and Docker are installed).
 This file should be used to start the environment.
+
+Once environment is running, it is possible to invoke main service from the host by running e.g. `curl -v http://127.0.0.1:3000/api/greet/world`.
