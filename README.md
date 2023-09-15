@@ -1,7 +1,7 @@
 # TyRAS Sample - Microservices
 This repository contains sample code for implementing microservices with [TyRAS framework](https://github.com/ty-ras).
 
-The [code](./code) folder contains all the TypeScript code used in the sample, demonstrating how to use `@ty-ras/backend-node-zod-openapi` and `@ty-ras/frontend-node-zod` libraries as type-safe (via `zod` library) HTTP server and client, respectively.
+The [code](./code) folder contains all the TypeScript code used in the sample, demonstrating how to use [`@ty-ras/backend-node-zod-openapi`](https://github.com/ty-ras/packaging) and [`@ty-ras/frontend-node-zod`](https://github.com/ty-ras/packaging) libraries as type-safe (via [`zod`](https://github.com/colinhacks/zod) library) HTTP server and client, respectively.
 The important folders are [main service](./code/components/service-main) and [sub service](./code/components/service-sub), each containing code for two microservices running as HTTP servers.
 The shared libraries containing the HTTP protocol spec for each service are located in [main service protocol](./code/components/service-main-protocol) and [sub service protocol](./code/components/service-sub-protocol) folders.
 
